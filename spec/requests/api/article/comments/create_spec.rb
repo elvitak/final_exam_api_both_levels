@@ -5,7 +5,8 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
 
   describe 'Visitor can successfully add a comment' do
     before do
-      post "/api/articles/#{article.id}/comments", params: { comment: { body: 'Enjoyed the article. Thank you!' } }
+      post "/api/articles/#{article.id}/comments",
+           params: { comment: { body: 'Enjoyed the article. Thank you!', article_id: article.id } }
     end
 
     it { is_expected.to have_http_status 201 }
