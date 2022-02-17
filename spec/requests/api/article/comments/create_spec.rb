@@ -37,5 +37,18 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
         expect(response_json['message']).to eq 'Article must exist'
       end
     end
+
+    describe 'due to missing comment body' do
+      before do
+        post "/api/articles/#{article.id}/comments",
+             params: { comment: { body: '', article_id: article.id } }
+      end
+
+      it { is_expected.to have_http_status 422 }
+
+      it 'is expected to respond with an error message' do
+        expect(response_json['message']).to eq 'Body can\'t be blank'
+      end
+    end
   end
 end
