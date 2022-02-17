@@ -23,4 +23,17 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
       expect(response_json['comment']['body']).to eq 'Enjoyed the article. Thank you!'
     end
   end
+
+  describe 'Visitor can not add a comment due to missing article id' do
+    before do
+      post "/api/articles/#{article.id}/comments",
+           params: { comment: { body: 'Enjoyed the article. Thank you!' } }
+    end
+
+    it { is_expected.to have_http_status 404 }
+
+    it 'is expected to respond with an error message' do
+      expect(response_json['message']).to eq 'Article must exist'
+    end
+  end
 end

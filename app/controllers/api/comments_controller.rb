@@ -2,7 +2,11 @@ class Api::CommentsController < ApplicationController
   def create
     comment = Comment.new(comment_params)
     comment.save
-    render json: { comment: comment }, status: 201
+    if comment.persisted?
+      render json: { comment: comment }, status: 201
+    else
+      render json: { message: comment.errors.full_messages.to_sentence }, status: 404
+    end
   end
 
   private
