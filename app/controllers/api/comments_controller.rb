@@ -5,7 +5,7 @@ class Api::CommentsController < ApplicationController
     if comment.persisted?
       render json: { comment: comment }, status: 201
     else
-      render json: { message: comment.errors.full_messages.to_sentence }, status: 404
+      render json: { message: comment.errors.full_messages.to_sentence }, status: 422
     end
   end
 
