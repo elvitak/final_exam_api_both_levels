@@ -19,7 +19,7 @@ RSpec.describe 'POST /api/articles/:id/comments', type: :request do
     end
 
     it 'is expected to respond with comment body' do
-      expect(response_body['comment']['message']).to eq 'Enjoyed the article. Thank you!'
+      expect(response_json['comment']['body']).to eq 'Enjoyed the article. Thank you!'
     end
   end
 end
