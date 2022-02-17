@@ -1,7 +1,7 @@
 RSpec.describe Comment, type: :model do
   describe 'DB table' do
     it { is_expected.to have_db_column(:body).of_type(:text) }
-    it { is_expected.to have_db_column(:article_id).of_type(:bigint) }
+    it { is_expected.to have_db_column(:article_id).of_type(:integer) }
   end
 
   describe 'Validations' do
